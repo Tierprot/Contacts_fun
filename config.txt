@@ -1,0 +1,3 @@
+min_dist = 3
+max_dist = 12
+

@@ -1,6 +1,8 @@
-from make_coordinates import make_coordinates
+from make_coordinates import make_coordinates_from_text
 from make_distances import make_distances
 from build_graph import build_plot
+import requests
+
 
 def name():
     pdb_id=input('enter pdb code\n')
@@ -9,8 +11,11 @@ def name():
 
 if __name__ == '__main__':
    with open('config.txt') as inp:
-       exec(inp.readfile())
-   pdb_id, chain = name()
-   coordinates = make_coordinates(pdb_id, chain)
+       exec(inp.read())
+   #pdb_id, chain = name()
+   pdb_id = '1A6M'
+   chain = 'A'
+   data = requests.get('https://files.rcsb.org/download/{}.pdb'.format(pdb_id))
+   coordinates = make_coordinates_from_text(data.text, chain)
    distances = make_distances(coordinates)
    build_plot(distances)
