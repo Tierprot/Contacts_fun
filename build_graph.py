@@ -2,7 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def build_plot(keks, min_dist=3, max_dist=13 ):
+def build_plot(keks, name, min_dist=3, max_dist=13, resolution=100):
     x = []
     y = []
     c = []
@@ -15,7 +15,10 @@ def build_plot(keks, min_dist=3, max_dist=13 ):
            c.append(min_dist)
         else:
            c.append(i[2])
-    plt.hexbin(x, y, c)
-    plt.colorbar()
+    plt.hexbin(x, y, c, gridsize=resolution, cmap=plt.cm.jet_r)
+    plt.xlabel(name)
+    plt.ylabel(name)
+    plt.title("Contacts map")
+    plt.colorbar().set_label('distance, A')
     plt.show()
 
